@@ -3,18 +3,16 @@ import '../css/MonthVIew.css';
 import DayOfMonth from './MonthView/DayOfMonth'
 import moment, {months} from "moment";
 
-function MonthView(props) {
+function MonthView({startDay,calShift,isWeekDaysShort,firstDayMon,totalDays}) {
 
-    const totalDays=42
-    const daysArray=[...Array(42)]
+    const daysArray=[...Array(totalDays)]
 
-    let startDay=props.startDay.clone()
-    startDay.add(props.calShift,"month")
+    startDay.add(calShift,"month")
     let selectedMonth = startDay.clone()
     startDay=startDay.startOf('month').startOf('week')
 
-    const endDay=startDay.clone()
-    endDay.add(42,'day')
+    const endDay=startDay.clone().add(totalDays,'day')
+
 
     const calendar =[]
 
@@ -25,14 +23,14 @@ function MonthView(props) {
 
 You can pass an integer into each of those functions to get a specific month or weekday.
 * */
-    if(props.isWeekDaysShort){
+    if(isWeekDaysShort){
         weekArray = moment.weekdaysShort();
     }
     else{
         weekArray = moment.weekdays();
     }
 
-    if(props.firstDayMon) {
+    if(firstDayMon) {
         weekArray=weekArray.splice(1).concat(weekArray);
     }
     for (let i = 0; i < weekArray.length; i++) {

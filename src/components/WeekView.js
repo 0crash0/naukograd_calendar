@@ -29,19 +29,6 @@ function WeekView(props) {
         days[i] = day.getFullYear() + "-" + day.getMonth()+1 + "-" + day.getDate()
 
     }
-    let events =[{start: days[1] + " 09:00", end: days[1] + " 10:00", resourceId: 1, display: "background"},
-        {start: days[1] + " 12:00", end: days[1] + " 14:00", resourceId: 2, display: "background"},
-    {start: days[2] + " 17:00", end: days[2] + " 24:00", resourceId: 1, display: "background"},
-    {start: days[0] + " 10:00", end: days[0] + " 14:00", resourceId: 1, title: "Test event1 IF YOU SEEN THIS CALL THE ADMINISTRATOR", color: "#FE6B64"},
-    {start: days[1] + " 16:00", end: days[2] + " 08:00", resourceId: 2, title: "Test event2 IF YOU SEEN THIS CALL THE ADMINISTRATOR", color: "#B29DD9"},
-    {start: days[2] + " 09:00", end: days[2] + " 13:00", resourceId: 2, title: "Test event3 IF YOU SEEN THIS CALL THE ADMINISTRATOR", color: "#779ECB"},
-    {start: days[3] + " 14:00", end: days[3] + " 20:00", resourceId: 1, title: "Test event4 IF YOU SEEN THIS CALL THE ADMINISTRATOR", color: "#FE6B64"},
-    {start: days[3] + " 15:00", end: days[3] + " 18:00", resourceId: 1, title: "Test event5 IF YOU SEEN THIS CALL THE ADMINISTRATOR", color: "#779ECB"},
-    {start: days[5] + " 10:00", end: days[5] + " 16:00", resourceId: 2, title: "Test event6  <i><b>IF YOU SEEN THIS</b></i> <b>CALL THE ADMINISTRATOR</b>", color: "#779ECB"},
-    {start: days[5] + " 14:00", end: days[5] + " 19:00", resourceId: 2, title: "Test event7 IF YOU SEEN THIS CALL THE ADMINISTRATOR", color: "#FE6B64"},
-    {start: days[5] + " 18:00", end: days[5] + " 21:00", resourceId: 2, title: "Test event8 IF YOU SEEN THIS CALL THE ADMINISTRATOR", color: "#B29DD9"},
-    {start: days[1], end: days[1], resourceId: 1, title: "IF YOU SEEN THIS CALL THE ADMINISTRATOR", color: "#B29DD9", allDay: true}]
-
 
     let WeekView//='ResourceView'
     let AllDay=true
