@@ -6,8 +6,7 @@ function WeekView(props) {
     let startDay=props.startDay.clone()
     startDay.add(props.calShift,"week")
     startDay=startDay.startOf('week')
-    const endDay=startDay.clone()
-    endDay.add(6,'day')
+    const endDay=startDay.clone().add(6,'day')
 
 
 
@@ -30,11 +29,11 @@ function WeekView(props) {
 
     }
 
-    let WeekView//='ResourceView'
+    let WeekView = props.WeekView
     let AllDay=true
     // Generate Week days
     var daysA = [];
-    if(WeekView==='ResourceView'){
+    if(WeekView==='resource'){
         daysA = [
             ["Самолет","airp"],
             ["Робототехника","robo"],

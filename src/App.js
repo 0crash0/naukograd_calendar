@@ -32,6 +32,9 @@ function App() {
     const setViewWeek=() =>{
         setViewSelected("week")
     }
+    const setViewResource=() =>{
+        setViewSelected("resource")
+    }
     const setViewMonth=() =>{
         setViewSelected("month")
     }
@@ -40,13 +43,14 @@ function App() {
 
     <div className="App">
 
-        <ToolBar prevHandler={prevHandler} nextHandler={nextHandler} todayHandler={todayHandler} setViewWeek={setViewWeek} setViewMonth={setViewMonth} />
+        <ToolBar prevHandler={prevHandler} nextHandler={nextHandler} todayHandler={todayHandler} setViewWeek={setViewWeek} setViewResource={setViewResource} setViewMonth={setViewMonth} />
 
 
         {
             {
                 "month": (<MonthView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} totalDays={totalDays} />),
-                "week" :(<WeekView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} />)
+                "week" :(<WeekView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} WeekView="week" />),
+                "resource" :(<WeekView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} WeekView="resource" />)
             }[viewSelected]
 
         }

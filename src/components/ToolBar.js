@@ -10,6 +10,7 @@ function ToolBar(props) {
             </div>
             <div className="ViewSet">
                 <div onClick={props.setViewWeek}  key="keyweek">week</div>
+                <div onClick={props.setViewResource}  key="resource">resource</div>
                 <div onClick={props.setViewMonth}  key="keymonth">month</div>
             </div>
 
