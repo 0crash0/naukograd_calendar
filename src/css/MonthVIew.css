@@ -23,9 +23,10 @@
 }
 
 .ToDay{
+
 }
 .ToDay h1{
-    color:red;
+    color:red !important;
 }
 .WeekendDay{
     background-color: #ffd6d1;
@@ -33,4 +34,19 @@
 
 .WeekendDay h1{
     color:darkcyan;
+}
+
+.DayOfWeek{
+    background-color: aqua;
+}
+
+.DayOfWeek h1{
+    color: darkblue;
+}
+
+.OtherMonth{
+
+}
+.OtherMonth h1{
+    color: gray;
 }

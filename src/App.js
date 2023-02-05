@@ -10,23 +10,35 @@ moment.locale('ru');
 function App() {
     ///////////////////////////////////////////////////////       переключение позиции отображения месяц неделя и тд
     const [calShift,setCalShift]=useState(0)
+    const [viewSelected,setViewSelected]=useState("month")
+
     let startDay=moment()
     const prevHandler=()=>{setCalShift(calShift-1)}
     const todayHandler=()=>{setCalShift(0)}
     const nextHandler=()=>{setCalShift(calShift+1)}
     ////////////////////////////////////////////////////////
 
+    const setViewWeek=() =>{
+        setViewSelected("week")
+    }
+    const setViewMonth=() =>{
+        setViewSelected("month")
+    }
 
   return (
 
     <div className="App">
 
-        <ToolBar prevHandler={prevHandler} nextHandler={nextHandler} todayHandler={todayHandler}/>
+        <ToolBar prevHandler={prevHandler} nextHandler={nextHandler} todayHandler={todayHandler} setViewWeek={setViewWeek} setViewMonth={setViewMonth} />
 
 
-        <WeekView startDay={startDay} firstDayMon={true} calShift={calShift} />
+        {
+            {
+                "month": (<MonthView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} />),
+                "week" :(<WeekView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} />)
+            }[viewSelected]
 
-        <MonthView startDay={startDay} firstDayMon={true} calShift={calShift}/>
+        }
 
     </div>
   );

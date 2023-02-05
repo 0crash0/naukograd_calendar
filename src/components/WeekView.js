@@ -63,7 +63,7 @@ function WeekView(props) {
         var day = startDay;
 
         while (day <= endDay) {
-            daysA.push([day.format('DD'),day.format('ddd')]);
+            daysA.push([day.format('D'),day.format('ddd')]);
             day = day.clone().add(1, 'd');
         }
     }
@@ -84,7 +84,7 @@ function WeekView(props) {
             <div className="days">
                 {daysA.map(value => {
                     return(
-                        <div className="day">
+                        <div className="day" >
                             <div className="date">
                                 <p className="date-num">{value[0]}</p>
                                 {
