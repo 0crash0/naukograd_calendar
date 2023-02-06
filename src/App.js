@@ -39,6 +39,16 @@ function App() {
         setViewSelected("month")
     }
 
+
+    const resourcesS = [
+        {id: 1, title: 'Самолет'},
+        {id: 2, title: 'Робототехника'},
+        {id: 3, title: 'IT'},
+        {id: 4, title: 'Графдизайн'},
+        {id: 5, title: 'Архитектура'},
+        {id: 6, title: 'Медиазал'}
+    ]
+
   return (
 
     <div className="App">
@@ -49,8 +59,8 @@ function App() {
         {
             {
                 "month": (<MonthView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} totalDays={totalDays} />),
-                "week" :(<WeekView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} WeekView="week" />),
-                "resource" :(<WeekView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} WeekView="resource" />)
+                "week" :(<WeekView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} WeekView="week" startHour={9} endHour={18} HalfHour={false} Allday={true} />),
+                "resource" :(<WeekView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} WeekView="ResourceView" resourcesA={resourcesS}/>)
             }[viewSelected]
 
         }

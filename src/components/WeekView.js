@@ -1,6 +1,9 @@
 import '../css/WeekView.css';
 import moment from "moment";
 import React from "react";
+import styled from 'styled-components';
+
+
 
 function WeekView(props) {
     let startDay=props.startDay.clone()
@@ -11,15 +14,10 @@ function WeekView(props) {
 
 
 
-    let arrHours=getColumnOfHours('hh:mm A', 9, 19,false,true)
-    let resources = [
-        {id: 1, title: 'Самолет'},
-        {id: 2, title: 'Робототехника'},
-        {id: 3, title: 'IT'},
-        {id: 4, title: 'Графдизайн'},
-        {id: 5, title: 'Архитектура'},
-        {id: 6, title: 'Медиазал'}
-    ]
+    const arrHours=getColumnOfHours('kk:mm ', props.startHour, props.endHour,props.HalfHour,props.Allday)
+    const HourRowsNum=(props.endHour-props.startHour)*(props.HalfHour?2:1) +(props.Allday?1:0)
+
+
     let days = [];
     for (let i = 0; i < 7; ++i) {
         let day = new Date();
@@ -30,23 +28,18 @@ function WeekView(props) {
     }
 
     let WeekView = props.WeekView
-    let AllDay=true
+    
     // Generate Week days
-    var daysA = [];
-    if(WeekView==='resource'){
-        daysA = [
-            ["Самолет","airp"],
-            ["Робототехника","robo"],
-            ["IT","it"],
-            ["Граф. дизайн","graf"],
-            ["Архитектура","arh"],
-            ["Медиа зал","media"],
-            ["Черная комната","black"]
-        ];
+    let daysA = [];
+
+    if(WeekView==='ResourceView'){
+        daysA = props.resourcesA
+
     }
+
     else {
 
-        var day = startDay;
+        let day = startDay;
 
         while (day <= endDay) {
             daysA.push([day.format('D'),day.format('ddd')]);
@@ -55,24 +48,39 @@ function WeekView(props) {
     }
 
 
+    const DaysRowsNum=daysA.length
+    console.log(DaysRowsNum)
+    const Timeline= styled.div`
+      display: grid;
+      grid-template-rows: repeat(${HourRowsNum}, var(--timeHeight));`;
+    const Days= styled.div`
+        display: grid;
+        grid-template-columns: repeat(${DaysRowsNum},1fr);
+        grid-template-rows: repeat(${HourRowsNum}, var(--timeHeight));
 
+    `;
+    const Events= styled.div`
+      display: grid;
+      grid-template-rows: repeat(${HourRowsNum}, var(--timeHeight));
 
+    `;
     return(
 
         <div className="calendar">
-            <div className="timeline">
+            <Timeline className="timeline">
                 <div className="spacer"></div>
                 {arrHours.map(value => {
                     return(<div className="time-marker">{value}</div>)
                 })}
 
-            </div>
-            <div className="days">
+            </Timeline>
+            <Days className="days">
                 {daysA.map(value => {
                     return(
                         <div className="day" >
                             <div className="date">
-                                <p className="date-num">{value[0]}</p>
+                                {console.log(value)}
+                                <p className="date-num">{(WeekView === 'ResourceView') ? value.title : value[0]}</p>
                                 {
                                 /*(WeekView !== 'ResourceView') ? (
                                     <p className="date-day">{value[1]}</p>
@@ -87,34 +95,54 @@ function WeekView(props) {
 
 
                             </div>
-                            <div className="events">
-                                <div className="event start-6 end-12 securities">
+                            <Events className="events">
+                               {/* <div className="event"  style={{gridRowStart:2,gridRowEnd:7,gridColumnStart:2,gridColumnEnd:3}}>
                                     <p className="title">Securities Regulation</p>
                                     <p className="time">2 PM - 5 PM</p>
-                                </div>
-                            </div>
+                                </div>*/}
+                            </Events>
                         </div>)
                 })}
 
-            </div>
+
+                { /*                    gridColumns
+                    gridROW 1 - days                    1-firstDay
+                    gridROW 2 - All_day
+
+                */
+                 }
+                {daysA.map((value,idx) => {
+                    return(
+
+
+                                <div className="event"  style={{gridRowStart:2  +idx,gridRowEnd:3+idx,gridColumnStart:1+idx,gridColumnEnd:3+idx}}>
+                                    <p className="title">Securities Regulation</p>
+                                    <p className="time">2 PM - 5 PM</p>
+                                </div>
+
+                        )
+                })}
+
+            </Days>
         </div>
 
     )
 }
 
 
-function getColumnOfHours(formta='hh:mm A', startHour=9, endHour=19,halfHour=false,AllDay=true){
+function getColumnOfHours(format='hh:mm A', startHour=9, endHour=19,halfHour=false,AllDay=true,AlldayName="AllDay"){
 
     const arrHours = []
     if(AllDay){
-        arrHours.push("AllDay")
+        arrHours.push(AlldayName)
     }
-    for (let hour = startHour; hour < endHour; hour++) {
-        arrHours.push(moment({ hour }).format(formta))
-        if(halfHour){arrHours.push(moment({ hour, minute: 30 }).format(formta))}
+    for (let hour = startHour; hour <= endHour; hour++) {
+        arrHours.push(moment({ hour }).format(format))
+        if(halfHour){arrHours.push(moment({ hour, minute: 30 }).format(format))}
 
     }
     return arrHours;
+
 }
 
 export default WeekView

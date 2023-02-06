@@ -1,5 +1,5 @@
 import '../css/MonthVIew.css';
-
+import styled from 'styled-components';
 import DayOfMonth from './MonthView/DayOfMonth'
 import moment, {months} from "moment";
 

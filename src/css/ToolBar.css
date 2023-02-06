@@ -23,8 +23,13 @@
     background-color: transparent;
     color: white;
     border: 1px solid #e2f8ff;
-    border-radius: 30px;
+    border-radius: 7px;
     font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    min-width: 50px;
 }
 
 .ToolBar .ViewSet{
@@ -35,5 +40,11 @@
 .ToolBar .ViewSet div {
     background-color: transparent;
     color: white;
+    display: flex;
+    flex-wrap: wrap;
     border: 1px solid #e2f8ff;
+    justify-content: center;
+    align-content: center;
+    border-radius: 7px;
+    min-width: 50px;
 }
