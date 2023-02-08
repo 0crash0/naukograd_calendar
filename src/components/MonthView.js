@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import DayOfMonth from './MonthView/DayOfMonth'
 import moment, {months} from "moment";
 
-function MonthView({startDay,calShift,isWeekDaysShort,firstDayMon,totalDays}) {
+function MonthView({startDay,calShift,isWeekDaysShort,firstDayMon,totalDays,events}) {
 
     const daysArray=[...Array(totalDays)]
 
@@ -44,16 +44,40 @@ You can pass an integer into each of those functions to get a specific month or 
         calendar.push(day.clone())
         day.add(1,'day')
     }
+
+    let todayEvents =[]
+
+
     return (
         <div className="Calendar">
+
             <div className="MonthView" >
                 {
                     weekArray.map((dayOfWeek,idx)=>(
                         <DayOfMonth  day={dayOfWeek} key={idx} isHeader/>
                     ))
                 }
+                {
+
+                }
                 {calendar.map(dayItem => (
-                    <DayOfMonth  day={dayItem.format('D')} isToDay={moment().isSame(dayItem,'day')} isWeekend={(dayItem.day()==6||dayItem.day()===0)} isOtherMonth={!selectedMonth.isSame(dayItem,'month')}  key={dayItem.format('DDMMYY')}/>
+
+
+                    <DayOfMonth events={
+                        events.filter(
+                            event => (
+                                    dayItem.isBetween(moment(event.start),moment(event.end)) ||
+                                    dayItem.isSame(moment(event.start), "day") ||
+                                    dayItem.isSame(moment(event.end),"day")
+                            )
+                        )
+                    }
+                                day={dayItem.format('D')}
+                                isToDay={moment().isSame(dayItem,'day')}
+                                isWeekend={(dayItem.day()===6||dayItem.day()===0)}
+                                isOtherMonth={!selectedMonth.isSame(dayItem,'month')}
+                                key={dayItem.format('DDMMYY')}
+                    />
                     ))
                 }
 

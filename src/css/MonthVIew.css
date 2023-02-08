@@ -7,18 +7,18 @@
 .MonthView{
     display:grid;
     grid-template-columns: repeat(7,1fr);
-    grid-template-rows: repeat(6,1fr);
+    grid-template-rows: 50px repeat(5,1fr);
     grid-gap: 1px;
-    color: #d1ffe6;
+    color: #1100ff;
 }
 
 .DayOfMonth{
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    min-width: 140px;
-    min-height: 80px;
-    background-color: darkcyan;
+    /*min-width: 140px;*/
+    /*min-height: 80px;*/
+    background-color: #b4ffe0;
     align-items: center;
 
 }
@@ -29,7 +29,8 @@
     align-items: flex-start;
     padding: 10px;
     width:70%;
-    background-color: inherit;
+
+
 }
 .DayOfMonth .events div{
     display: flex;
@@ -38,28 +39,33 @@
     //background-color: green;
     color: black;
     width:70%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .ToDay{
 
 }
 .ToDay h1{
-    color:red !important;
+    color: #7fd300 !important;
+    background-color: #1100ff;
 }
 .WeekendDay{
-    background-color: #ffd6d1;
+    background-color: #ffd3f3;
 }
 
 .WeekendDay h1{
-    color:darkcyan;
+    color:#E83B67;
 }
 
 .DayOfWeek{
-    background-color: aqua;
+    background-color: #d2c2e5;
 }
 
 .DayOfWeek h1{
-    color: darkblue;
+    color: #3B58A2;
 }
 
 .OtherMonth{
