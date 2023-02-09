@@ -7,7 +7,7 @@
 .MonthView{
     display:grid;
     grid-template-columns: repeat(7,1fr);
-    grid-template-rows: 50px repeat(5,1fr);
+    grid-template-rows: 70px repeat(5,1fr);
     grid-gap: 1px;
     color: #1100ff;
 }
@@ -23,26 +23,29 @@
 
 }
 
+.DayOfMonth .divDay{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 .DayOfMonth .events{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
-    width:70%;
-
-
-}
-.DayOfMonth .events div{
-    display: flex;
-    justify-content: center;
-    border: solid white 1px;
-    //background-color: green;
-    color: black;
-    width:70%;
-
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    background: unset;
+}
+.DayOfMonth .events li{
+    display: flex;
+    justify-content: center;
+    border: solid white 1px;
+    color: black;
+
+
 }
 
 .ToDay{
