@@ -48,7 +48,7 @@ function App() {
     }
 
 
-    const resourcesS = [
+    const resourcesA = [
         {id: 1, title: 'Самолет'},
         {id: 2, title: 'Робототехника'},
         {id: 3, title: 'IT'},
@@ -67,8 +67,8 @@ function App() {
         {
             {
                 "month": (<MonthView events={events} startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} totalDays={totalDays} />),
-                "week" :(<WeekView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} WeekView="week" startHour={9} endHour={18} HalfHour={false} Allday={true} />),
-                "resource" :(<WeekView startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} WeekView="ResourceView" resourcesA={resourcesS}/>)
+                "week" :(<WeekView startDay={startDay.clone()} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} weekView="WeekView" startHour={9} endHour={18} halfHour={false} allDay={true} />),
+                "resource" :(<WeekView startDay={startDay.clone()} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} startHour={9} endHour={18} halfHour={false} allDay={true} weekView="ResourceView" resourcesA={resourcesA}/>)
             }[viewSelected]
 
         }

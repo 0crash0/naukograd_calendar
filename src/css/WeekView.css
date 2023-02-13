@@ -19,8 +19,20 @@
 
 .timeline {
     display: grid;
+    gap: 5px;
     grid-template-rows: repeat(var(--numHours), var(--timeHeight));
 }
+.time-marker{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.day{
+
+     display: flex;
+     justify-content: center;
+
+ }
 
 .days {
     display: grid;
@@ -39,6 +51,10 @@
     background: var(--calBgColor);
 }
 
+.currentHour{
+    border-top:  blue 2px dashed;
+    border-bottom: blue 2px dashed;
+}
 
 /* Event*/
 

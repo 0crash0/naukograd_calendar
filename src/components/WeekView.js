@@ -4,20 +4,16 @@ import React from "react";
 import styled from 'styled-components';
 
 
-
 function WeekView(props) {
     let startDay=props.startDay.clone()
     startDay.add(props.calShift,"week")
     startDay=startDay.startOf('week')
     const endDay=startDay.clone().add(6,'day')
 
+    const arrHours=getColumnOfHours('kk:mm ', props.startHour, props.endHour,props.halfHour,props.allDay)
+    const HourRowsNum=(props.endHour-props.startHour+1)*(props.halfHour?2:1) +(props.allDay?1:0)+1
 
-
-
-    const arrHours=getColumnOfHours('kk:mm ', props.startHour, props.endHour,props.HalfHour,props.Allday)
-    const HourRowsNum=(props.endHour-props.startHour)*(props.HalfHour?2:1) +(props.Allday?1:0)
-
-
+    console.log(HourRowsNum)
     let days = [];
     for (let i = 0; i < 7; ++i) {
         let day = new Date();
@@ -27,20 +23,16 @@ function WeekView(props) {
 
     }
 
-    let WeekView = props.WeekView
-    
+    let WeekView = props.weekView
+
     // Generate Week days
     let daysA = [];
 
     if(WeekView==='ResourceView'){
         daysA = props.resourcesA
-
     }
-
     else {
-
         let day = startDay;
-
         while (day <= endDay) {
             daysA.push([day.format('D'),day.format('ddd')]);
             day = day.clone().add(1, 'd');
@@ -49,7 +41,7 @@ function WeekView(props) {
 
 
     const DaysRowsNum=daysA.length
-    console.log(DaysRowsNum)
+
     const Timeline= styled.div`
       display: grid;
       grid-template-rows: repeat(${HourRowsNum}, var(--timeHeight));`;
@@ -68,31 +60,26 @@ function WeekView(props) {
 
         <div className="calendar">
             <Timeline className="timeline">
-                <div className="spacer"></div>
+                <div className="spacer" key={"spacer"}></div>
                 {arrHours.map(value => {
-                    return(<div className="time-marker">{value}</div>)
+                    return(<div className="time-marker" key={value}><p>{value}</p></div>)
                 })}
 
             </Timeline>
             <Days className="days">
                 {daysA.map(value => {
                     return(
-                        <div className="day" >
+                        <div className="day" key={(WeekView === 'ResourceView') ? value.title : value[0]}>
                             <div className="date">
-                                {console.log(value)}
+
                                 <p className="date-num">{(WeekView === 'ResourceView') ? value.title : value[0]}</p>
                                 {
-                                /*(WeekView !== 'ResourceView') ? (
-                                    <p className="date-day">{value[1]}</p>
-                                ) : ( '')*/
 
                                 (WeekView !== 'ResourceView') && (
                                     <p className="date-day">{value[1]}</p>
                                     )
 
                                 }
-
-
 
                             </div>
                             <Events className="events">
@@ -104,25 +91,19 @@ function WeekView(props) {
                         </div>)
                 })}
 
-
-                { /*                    gridColumns
-                    gridROW 1 - days                    1-firstDay
-                    gridROW 2 - All_day
-
-                */
-                 }
+                { insideClocks(props.startHour, props.endHour)&&(
+                    <div className="currentHour"  style={{gridRowStart:getNowHourRow(props.startHour, props.endHour,props.halfHour,props.allDay),gridRowEnd:getNowHourRow(props.startHour, props.endHour,props.halfHour,props.allDay),gridColumnStart:1,gridColumnEnd:8}}>
+                        <p>{moment().format("kk:mm")}</p>
+                    </div>)
+                }
                 {daysA.map((value,idx) => {
                     return(
-
-
-                                <div className="event"  style={{gridRowStart:2  +idx,gridRowEnd:3+idx,gridColumnStart:1+idx,gridColumnEnd:3+idx}}>
+                                 <div className="event"  style={{gridRowStart:2  +idx,gridRowEnd:3+idx,gridColumnStart:1+idx,gridColumnEnd:3+idx}}>
                                     <p className="title">Securities Regulation</p>
                                     <p className="time">2 PM - 5 PM</p>
                                 </div>
-
                         )
                 })}
-
             </Days>
         </div>
 
@@ -145,4 +126,23 @@ function getColumnOfHours(format='hh:mm A', startHour=9, endHour=19,halfHour=fal
 
 }
 
+function getNowHourRow( startHour=9, endHour=19,halfHour=false,AllDay=true){
+    let NowHour= Number(moment().format("kk"))
+    let NowMinute= Number(moment().format("mm"))
+    let RowNum =(endHour-startHour)*(halfHour?2:1) +(AllDay?1:0)+1
+
+
+    if(NowHour>=startHour && NowHour<=endHour){
+        RowNum=(NowHour-startHour+1)*(halfHour?2:1)+(AllDay?1:0)+1
+        if(halfHour && NowMinute<30){
+            RowNum--
+        }
+
+    }
+    return RowNum
+}
+function insideClocks(startHour=9, endHour=19) {
+    let NowHour= Number(moment().format("kk"))
+    return(NowHour>=startHour && NowHour<=endHour)
+}
 export default WeekView
