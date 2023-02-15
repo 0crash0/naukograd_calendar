@@ -51,11 +51,37 @@
     background: var(--calBgColor);
 }
 
-.currentHour{
-    border-top:  blue 2px dashed;
-    border-bottom: blue 2px dashed;
+.hourMarks{
+    border-top:  blue 1px dashed;
+    border-bottom:  blue 1px dashed;
 }
 
+.currentHour{
+    border-top:  blue 2px dashed;
+    position: relative;
+    top: calc(var(--timeHeight) / 2);
+}
+.currentHour p{
+    position: relative;
+    /*display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    */
+    top: calc(-1*var(--timeHeight) / 2);
+    left: 12px;
+}
+
+.currentHour:before {
+    background: #ea4335;
+    border-radius: 50%;
+    content: "";
+    position: absolute;
+    height: 12px;
+    margin-top: -7px;
+    width: 12px;
+    pointer-events: none;
+}
 /* Event*/
 
    .title {
@@ -70,6 +96,9 @@
     margin: 0 0.5rem;
     background: white;
     display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
 }
 
 .space,

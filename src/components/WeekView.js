@@ -13,14 +13,12 @@ function WeekView(props) {
     const arrHours=getColumnOfHours('kk:mm ', props.startHour, props.endHour,props.halfHour,props.allDay)
     const HourRowsNum=(props.endHour-props.startHour+1)*(props.halfHour?2:1) +(props.allDay?1:0)+1
 
-    console.log(HourRowsNum)
     let days = [];
-    for (let i = 0; i < 7; ++i) {
-        let day = new Date();
-        let diff = i - day.getDay();
-        day.setDate(day.getDate() + diff);
-        days[i] = day.getFullYear() + "-" + day.getMonth()+1 + "-" + day.getDate()
 
+    let day = startDay.clone();
+    while (day <= endDay) {
+        days.push(day.clone());
+        day = day.clone().add(1, 'd');
     }
 
     let WeekView = props.weekView
@@ -90,20 +88,50 @@ function WeekView(props) {
                             </Events>
                         </div>)
                 })}
+                { /////////////////////////////HOUR MARKS
+                    (props.hourMarks)&&(
+                    arrHours.map((val,idx)=>{
+                        return(
+                            <div className="hourMarks"  style={{gridRowStart:idx+2,gridRowEnd:idx+2,gridColumnStart:1,gridColumnEnd:8}}>
 
-                { insideClocks(props.startHour, props.endHour)&&(
-                    <div className="currentHour"  style={{gridRowStart:getNowHourRow(props.startHour, props.endHour,props.halfHour,props.allDay),gridRowEnd:getNowHourRow(props.startHour, props.endHour,props.halfHour,props.allDay),gridColumnStart:1,gridColumnEnd:8}}>
+                            </div>
+                        )
+                    })
+                    )
+                }
+                { ///////////////// NOW indicator
+                    (props.nowIndicator && insideClocks(props.startHour, props.endHour))&&(
+                    <div className="currentHour"  style={{gridRowStart:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay),gridRowEnd:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay),gridColumnStart:getNowHourCol(days,moment()),gridColumnEnd:getNowHourCol(days,moment())}}>
                         <p>{moment().format("kk:mm")}</p>
                     </div>)
                 }
-                {daysA.map((value,idx) => {
-                    return(
-                                 <div className="event"  style={{gridRowStart:2  +idx,gridRowEnd:3+idx,gridColumnStart:1+idx,gridColumnEnd:3+idx}}>
+                {
+                   days.map(val => {
+                        let eventstoday= props.events.filter(
+                            event => (
+                                val.isBetween(moment(event.start),moment(event.end)) ||
+                                val.isSame(moment(event.start), "day") ||
+                                val.isSame(moment(event.end),"day")
+                            )
+                        )
+                        return eventstoday.map(vall=>{
+                            return(<div key={vall.start} className="event"  style={{gridRowStart:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay, moment(vall.start)),gridRowEnd:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay, moment(vall.end)),gridColumnStart:getNowHourCol(days,moment(vall.start)),gridColumnEnd:getNowHourCol(days,moment(vall.end))}}>
+                                <p className="title">{vall.title}</p>
+                                <p className="title">{moment(vall.start).format("DD")}</p>
+                                <p className="title">{moment(vall.end).format("DD")}</p>
+                            </div>)
+                        })
+                    })
+                   /* daysA.map((value,idx) => {
+                            return(
+                                <div className="event"  style={{gridRowStart:2  +idx,gridRowEnd:3+idx,gridColumnStart:1+idx,gridColumnEnd:3+idx+1}}>
                                     <p className="title">Securities Regulation</p>
                                     <p className="time">2 PM - 5 PM</p>
                                 </div>
-                        )
-                })}
+                            )
+                        })*/
+
+                }
             </Days>
         </div>
 
@@ -126,9 +154,9 @@ function getColumnOfHours(format='hh:mm A', startHour=9, endHour=19,halfHour=fal
 
 }
 
-function getNowHourRow( startHour=9, endHour=19,halfHour=false,AllDay=true){
-    let NowHour= Number(moment().format("kk"))
-    let NowMinute= Number(moment().format("mm"))
+function getHourRow( startHour=9, endHour=19,halfHour=false,AllDay=true, testHour = moment()){
+    let NowHour= Number(testHour.format("kk"))
+    let NowMinute= Number(testHour.format("mm"))
     let RowNum =(endHour-startHour)*(halfHour?2:1) +(AllDay?1:0)+1
 
 
@@ -145,4 +173,29 @@ function insideClocks(startHour=9, endHour=19) {
     let NowHour= Number(moment().format("kk"))
     return(NowHour>=startHour && NowHour<=endHour)
 }
+
+function getNowHourCol(days,dayTest=moment()) {
+    let i=0
+    //isBefore
+    if(dayTest.isBefore(days[0],"day")){
+        return 1;
+    }
+    if(dayTest.isAfter(days[days.length-1],"day")){
+        return days.length;
+    }
+    for(i;i<=days.length-1;i++){
+        console.log(days[i].format("DD-MM-YY"),dayTest.format("DD-MM-YY"),i)
+        if(dayTest.isSame(days[i],"day")){
+
+            return i+1;
+
+        }
+
+    }
+
+}
+
+
+
 export default WeekView
+
