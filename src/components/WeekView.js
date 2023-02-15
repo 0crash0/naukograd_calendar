@@ -115,7 +115,7 @@ function WeekView(props) {
                             )
                         )
                         return eventstoday.map(vall=>{
-                            return(<div key={vall.start} className="event"  style={{gridRowStart:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay, moment(vall.start)),gridRowEnd:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay, moment(vall.end)),gridColumnStart:getNowHourCol(days,moment(vall.start)),gridColumnEnd:getNowHourCol(days,moment(vall.end))}}>
+                            return(<div key={vall.start} className="event"  style={{gridRowStart:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay, moment(vall.start)),gridRowEnd:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay, moment(vall.end)),gridColumnStart:getNowHourCol(days,moment(vall.start)),gridColumnEnd:getNowHourCol(days,moment(vall.end))+1}}>
                                 <p className="title">{vall.title}</p>
                                 <p className="title">{moment(vall.start).format("DD")}</p>
                                 <p className="title">{moment(vall.end).format("DD")}</p>
