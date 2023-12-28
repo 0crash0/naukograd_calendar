@@ -12,9 +12,35 @@
 
 .calendar {
     display: grid;
-    gap: 10px;
+    /*gap: 10px;*/
     grid-template-columns: auto 1fr;
     margin: 2rem;
+}
+
+
+.spacer {
+    border-right: 1px solid rgba(221,221,221,.6);
+}
+
+.days {
+    display: grid;
+    /*grid-column: 2;*/
+    gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    /*grid-template-columns: repeat(7,1fr);*/
+    grid-template-rows: repeat(var(--numHours), var(--timeHeight));/**/
+
+}
+
+.day{
+
+    display: flex;
+    justify-content: center;
+    border-right: 1px solid rgba(221,221,221,.6);
+    font-family: Oswald;
+    color: #EE7D45;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .timeline {
@@ -26,23 +52,16 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    border-top: 1px solid rgba(221,221,221,.6);
+    border-right: 1px solid rgba(221,221,221,.6);
+    color: #333;
 }
-.day{
-
-     display: flex;
-     justify-content: center;
-
- }
-
-.days {
-    display: grid;
-    /*grid-column: 2;*/
-    gap: 5px;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-template-columns: repeat(7,1fr);/**/
-    grid-template-rows: repeat(var(--numHours), var(--timeHeight));/**/
-
+.time-marker p{
+    margin-right: 10px;
 }
+
+
+
 
 .events{
     display: grid;
@@ -52,10 +71,15 @@
 }
 
 .hourMarks{
-    border-top:  blue 1px dashed;
-    border-bottom:  blue 1px dashed;
+    /*border-top:  blue 1px dashed;
+    border-bottom:  blue 1px dashed;*/
+    border-top: 1px solid rgba(221,221,221,.6);
 }
-
+.daysMarks{
+    /*border-right:  blue 1px dashed;
+    border-left:  blue 1px dashed;*/
+    border-right: 1px solid rgba(221,221,221,.6);
+}
 .currentHour{
     border-top:  blue 2px dashed;
     position: relative;
@@ -101,8 +125,7 @@
     justify-content: space-around;
 }
 
-.space,
-.date {
+.space, .date {
     height: 60px
 }
 body {

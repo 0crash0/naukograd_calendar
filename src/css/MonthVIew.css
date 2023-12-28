@@ -79,10 +79,13 @@
 .OtherMonth h1{
     color: gray;
 }
-
+/*                  Popup daily events*/
 .popup-content{
     background: aquamarine;
     display: flex;
+}
+.popup-content .popup-arrow {
+    color: aquamarine;
 }
 .popup-content .hidden-events{ /*array popup*/
     display: inline-grid;

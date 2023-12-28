@@ -97,7 +97,20 @@ function WeekView(props) {
                             </div>
                         )
                     })
-                    )
+                    )}
+
+
+                {/////////////////////////////DAYS MARKS
+
+                    daysA.map((val,idx)=>{
+                            return(
+                                <div className="daysMarks"  style={{gridRowStart:2,gridRowEnd:13,gridColumnStart:1+idx,gridColumnEnd:1+idx}}>
+
+                                </div>
+                            )
+                        })
+
+
                 }
                 { ///////////////// NOW indicator
                     (props.nowIndicator && insideClocks(props.startHour, props.endHour))&&(
