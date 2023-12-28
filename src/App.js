@@ -6,6 +6,9 @@ import ToolBar from './components/ToolBar';
 import moment from "moment/moment";
 import axios from "axios";
 import 'moment/locale/ru'
+
+import eventsDB from "./db.json"
+
 moment.locale('ru');
 function App() {
     ///////////////////////////////////////////////////////       переключение позиции отображения месяц неделя и тд
@@ -16,12 +19,14 @@ function App() {
     const totalDays=42
 
     useEffect(()=>{
-        axios({
+       /* axios({
             url: 'http://localhost:3004/events',
             method: 'get'
         },)
             .then(res => stEvents(res.data))
-            .catch (err => console.error(err))
+            .catch (err => console.error(err))*/
+
+        stEvents(eventsDB.events)
 
 /*
         fetch('http://localhost:3004/events')//http://localhost:3004/events?start_gte=2023-02-05%2018:00

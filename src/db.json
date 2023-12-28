@@ -1,9 +1,9 @@
 
 {
   "events": [
-    {"start": "2023-12-11 09:00", "end": "2023-12-18 10:00", "resourceId": 1, "title":"123", "display" : "background"},
-    {"start": "2023-12-10 12:00", "end":  "2023-12-14  14:00", "resourceId": 2, "title":"223", "display" : "background"},
-    {"start":  "2023-12-15 17:00", "end":  "2023-12-17  24:00", "resourceId": 1, "title":"323", "display": "background"},
+    {"start": "2023-12-11 09:00", "end": "2023-12-18 10:00", "resourceId": 1, "title":"Первый", "display" : "background"},
+    {"start": "2023-12-10 12:00", "end":  "2023-12-14  14:00", "resourceId": 2, "title":"Второй", "display" : "background"},
+    {"start":  "2023-12-15 17:00", "end":  "2023-12-17  24:00", "resourceId": 1, "title":"третий", "display": "background"},
     {"start": "2023-12-17 10:00", "end":  "2023-12-19  14:00", "resourceId": 1, "title": "Test event1 IF YOU SEEN THIS CALL THE ADMINISTRATOR", "color": "#FE6B64"},
     {"start": "2023-12-05 16:00", "end":  "2023-12-05  08:00", "resourceId": 2, "title": "Test event2 IF YOU SEEN THIS CALL THE ADMINISTRATOR", "color": "#B29DD9"},
     {"start": "2023-12-05 09:00", "end":  "2023-12-05  13:00", "resourceId": 2, "title": "Test event3 IF YOU SEEN THIS CALL THE ADMINISTRATOR", "color": "#779ECB"},
@@ -14,7 +14,7 @@
     {"start":  "2023-12-05 18:00", "end":  "2023-12-05  21:00", "resourceId": 2, "title": "Test event8 IF YOU SEEN THIS CALL THE ADMINISTRATOR", "color": "#B29DD9"},
     {"start": "2023-12-05 09:00",  "end": "2023-12-05 12:00" , "resourceId": 1, "title": "IF YOU SEEN THIS CALL THE ADMINISTRATOR", "color": "#B29DD9", "allDay": true},
 
-    {"start": "2023-12-14 09:00", "end": "2023-02-14 10:00", "resourceId": 1, "title":"1123", "display" : "background"},
-    {"start": "2023-12-13 12:00", "end":  "2023-02-15  14:00", "resourceId": 2, "title":"1223", "display" : "background"}
+    {"start": "2023-12-14 09:00", "end": "2023-12-15 10:00", "resourceId": 1, "title":"четвертый", "display" : "background"},
+    {"start": "2023-12-13 12:00", "end":  "2023-12-15  14:00", "resourceId": 2, "title":"пятый", "display" : "background"}
   ]
 }
