@@ -3,6 +3,7 @@ import moment from "moment";
 import React from "react";
 import styled from 'styled-components';
 
+//TODO change AllDay height?
 
 function WeekView(props) {
     let startDay=props.startDay.clone()
@@ -82,7 +83,15 @@ function WeekView(props) {
                     return (
 
                         <div className="day" key={(WeekView === 'ResourceView') ? value.title : value[0]}>
-                            <div className={((WeekView !== 'ResourceView')&& (moment().isSame(days[idx],"day"))? "date-today" : "date")}>
+                            <div className={
+                                (days[idx].day() ===0 || days[idx].day() ===6 ?
+                                        "date-off" :(
+                                                (WeekView !== 'ResourceView')   &&
+                                                                                    (moment().isSame(days[idx],"day"))?
+                                                "date-today" : "date"
+                                            )
+                                )
+                            }>
 
                                 <p className="date-num">{(WeekView === 'ResourceView') ? value.title : value[0]}</p>
                                 {

@@ -47,6 +47,10 @@
     border-bottom: #3B58A2;
     border-bottom-width: 2px;
 }
+.day .date-off{
+    color: #E83A68;
+    border-bottom: #3B58A2;
+}
 
 .timeline {
     display: grid;
@@ -63,6 +67,7 @@
     border-top: 1px solid rgba(221,221,221,.6);
     border-right: 1px solid rgba(221,221,221,.6);
     color: #333;
+
 }
 
 .time-free{
