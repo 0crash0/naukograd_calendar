@@ -76,7 +76,7 @@ You can pass an integer into each of those functions to get a specific month or 
                                 isToDay={moment().isSame(dayItem,'day')}
                                 isWeekend={(dayItem.day()===6||dayItem.day()===0)}
                                 isOtherMonth={!selectedMonth.isSame(dayItem,'month')}
-                                key={dayItem.format('DDMMYY')}
+                                key={dayItem.format('DDMMYY') /* key={dayItem.unix()}*/}
                     />
                     ))
                 }

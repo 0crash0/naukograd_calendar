@@ -11,16 +11,21 @@ function WeekView(props) {
     const endDay=startDay.clone().add(6,'day')
 
     const arrHours=getColumnOfHours('kk:mm ', props.startHour, props.endHour,props.halfHour,props.allDay)
-    const HourRowsNum=(props.endHour-props.startHour+1)*(props.halfHour?2:1) +(props.allDay?1:0)+1
+    let HourRowsNum = (props.endHour - props.startHour + 1) * (props.halfHour ? 2 : 1) + (props.allDay ? 1 : 0) + 1;
 
     let days = [];
 
     let day = startDay.clone();
     while (day <= endDay) {
-        days.push(day.clone());
+        if((day.day()===0 && !props.isShowSun) || (day.day()===6 && !props.isShowSat) ){
+            console.log("ВС", day)
+        }
+        else{
+            days.push(day.clone());
+        }
         day = day.clone().add(1, 'd');
     }
-
+    /*console.log(days)*/
     let WeekView = props.weekView
 
     // Generate Week days
@@ -30,11 +35,15 @@ function WeekView(props) {
         daysA = props.resourcesA
     }
     else {
-        let day = startDay;
-        while (day <= endDay) {
+        days.map((day)=>{
             daysA.push([day.format('D'),day.format('ddd')]);
             day = day.clone().add(1, 'd');
-        }
+        });
+        let day = startDay;
+        /*while (day <= endDay) {
+            daysA.push([day.format('D'),day.format('ddd')]);
+            day = day.clone().add(1, 'd');
+        }*/
     }
 
 
@@ -58,17 +67,22 @@ function WeekView(props) {
 
         <div className="calendar">
             <Timeline className="timeline">
-                <div className="spacer" key={"spacer"}></div>
+                <div className="time-marker time-free"
+                     key="time-maker-free"><p></p></div>
                 {arrHours.map(value => {
-                    return(<div className="time-marker" key={value}><p>{value}</p></div>)
+                    return (<div
+                        className={"time-marker " + (value.slice(0, 2) === moment().format("HH") ? "time-now" : "")}
+                        key={"time-maker-"+value}><p>{value}</p></div>)
                 })}
 
             </Timeline>
             <Days className="days">
-                {daysA.map(value => {
-                    return(
+
+                {daysA.map((value, idx) => {
+                    return (
+
                         <div className="day" key={(WeekView === 'ResourceView') ? value.title : value[0]}>
-                            <div className="date">
+                            <div className={((WeekView !== 'ResourceView')&& (moment().isSame(days[idx],"day"))? "date-today" : "date")}>
 
                                 <p className="date-num">{(WeekView === 'ResourceView') ? value.title : value[0]}</p>
                                 {
@@ -104,9 +118,7 @@ function WeekView(props) {
 
                     daysA.map((val,idx)=>{
                             return(
-                                <div className="daysMarks"  style={{gridRowStart:2,gridRowEnd:13,gridColumnStart:1+idx,gridColumnEnd:1+idx}}>
-
-                                </div>
+                                <div className="daysMarks"  style={{gridRowStart:2,gridRowEnd:HourRowsNum+1,gridColumnStart:1+idx,gridColumnEnd:1+idx}}></div>
                             )
                         })
 
@@ -114,10 +126,20 @@ function WeekView(props) {
                 }
                 { ///////////////// NOW indicator
                     (props.nowIndicator && insideClocks(props.startHour, props.endHour))&&(
-                    <div className="currentHour"  style={{gridRowStart:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay),gridRowEnd:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay),gridColumnStart:getNowHourCol(days,moment()),gridColumnEnd:getNowHourCol(days,moment())}}>
-                        <p>{moment().format("kk:mm")}</p>
-                    </div>)
+                        <div className="currentHour"  style={
+                            {
+                                gridRowStart:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay),
+                                gridRowEnd:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay),
+                                gridColumnStart:getNowHourCol(days,(props.isNowIndicatorWhole? days[0]:moment())),
+                                gridColumnEnd:getNowHourCol(days,(props.isNowIndicatorWhole? days[days.length-1]:moment()))+1
+                            }
+                        }>
+                            <p>{moment().format("kk:mm")}</p>
+                        </div>
+                    )
                 }
+
+
                 {
                    days.map(val => {
                         let eventstoday= props.events.filter(
@@ -149,6 +171,7 @@ function WeekView(props) {
         </div>
 
     )
+
 }
 
 
@@ -197,14 +220,15 @@ function getNowHourCol(days,dayTest=moment()) {
         return days.length;
     }
     for(i;i<=days.length-1;i++){
-        console.log(days[i].format("DD-MM-YY"),dayTest.format("DD-MM-YY"),i)
-        if(dayTest.isSame(days[i],"day")){
 
+        if(dayTest.isSame(days[i],"day")){
+            /*console.log(days[i].format("DD-MM-YY"),dayTest.format("DD-MM-YY"),i)*/
             return i+1;
 
         }
 
     }
+
 
 }
 

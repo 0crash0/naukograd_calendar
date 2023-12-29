@@ -42,12 +42,20 @@
     font-size: 18px;
     font-weight: bold;
 }
+.day .date-today{
+    color: #3b58a2;
+    border-bottom: #3B58A2;
+    border-bottom-width: 2px;
+}
 
 .timeline {
     display: grid;
     gap: 5px;
     grid-template-rows: repeat(var(--numHours), var(--timeHeight));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
+
+
 .time-marker{
     display: flex;
     justify-content: center;
@@ -56,10 +64,23 @@
     border-right: 1px solid rgba(221,221,221,.6);
     color: #333;
 }
+
+.time-free{
+    border-top: none;
+    border-right: 1px solid rgba(221,221,221,.6);
+}
+
 .time-marker p{
     margin-right: 10px;
 }
 
+
+
+.time-now p{
+    color:#3b58a2;
+    font-weight: bold;
+    font-size: 18px;
+}
 
 
 
