@@ -19,7 +19,7 @@ function WeekView(props) {
     let day = startDay.clone();
     while (day <= endDay) {
         if((day.day()===0 && !props.isShowSun) || (day.day()===6 && !props.isShowSat) ){
-            console.log("ВС", day)
+            /*console.log("ВС", day)*/
         }
         else{
             days.push(day.clone());
@@ -84,7 +84,7 @@ function WeekView(props) {
 
                         <div className="day" key={(WeekView === 'ResourceView') ? value.title : value[0]}>
                             <div className={
-                                (days[idx].day() ===0 || days[idx].day() ===6 ?
+                                ((WeekView !== 'ResourceView')   && (days[idx].day() ===0 || days[idx].day() ===6) ?
                                         "date-off" :(
                                                 (WeekView !== 'ResourceView')   &&
                                                                                     (moment().isSame(days[idx],"day"))?

@@ -89,7 +89,7 @@ function App() {
             {
                 "month": (<MonthView events={events} startDay={startDay} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} totalDays={totalDays} />),
                 "week" :(<WeekView events={events} startDay={startDay.clone()} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} weekView="WeekView" startHour={startHour} endHour={endHour} halfHour={isHalfHour} allDay={true} isShowSat={isSat} isShowSun={isSun} isNowIndicatorWhole={isNowIndicatorWhole} hourMarks nowIndicator/>),
-                "resource" :(<WeekView events={events} startDay={startDay.clone()} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} startHour={startHour} endHour={endHour} halfHour={isHalfHour} allDay={true} weekView="ResourceView"  resourcesA={resourcesA} isNowIndicatorWhole={isNowIndicatorWhole}/>)
+                "resource" :(<WeekView events={events} startDay={startDay.clone()} firstDayMon={true} calShift={calShift}  isWeekDaysShort={true} startHour={startHour} endHour={endHour} halfHour={isHalfHour} allDay={true} weekView="ResourceView"  resourcesA={resourcesA} isNowIndicatorWhole={isNowIndicatorWhole}  hourMarks />)
             }[viewSelected]
 
         }
