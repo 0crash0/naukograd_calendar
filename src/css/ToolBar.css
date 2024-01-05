@@ -14,7 +14,7 @@
 .ToolBar .GO{
     display: flex;
     justify-content: center;
-    height: 50px;
+    height: 40px;
 
 }
 
@@ -23,17 +23,23 @@
     color: white;
     border: 1px solid #e2f8ff;
 
-    font-size: 20px;
+    font-size: 16px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    min-width: 50px;
+    min-width: 40px;
 }
+
 
 .ToolBar .GO .left{
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
+}
+.ToolBar .GO .center{
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    min-width: 100px;
 }
 .ToolBar .GO .right{
     border-top-right-radius: 4px;
@@ -43,7 +49,7 @@
 .ToolBar .ViewSet{
     display: flex;
     justify-content: center;
-    height: 50px;
+    height: 40px;
 }
 .ToolBar .ViewSet div {
     background-color: transparent;
@@ -54,7 +60,8 @@
     justify-content: center;
     align-content: center;
     border-radius: 7px;
-    min-width: 50px;
+    min-width: 60px;
+
 }
 
 .logo {

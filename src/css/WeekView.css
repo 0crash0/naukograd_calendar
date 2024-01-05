@@ -134,11 +134,6 @@
 }
 /* Event*/
 
-   .title {
-       font-weight: 600;
-       margin-bottom: 0.25rem;
-   }
-
 .event {
     border: 1px solid var(--eventBorderColor);
     border-radius: 5px;
@@ -146,11 +141,16 @@
     margin: 0 0.5rem;
     background: white;
     display: flex;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
+    flex-direction: column;
     align-content: center;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
 }
+.title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
 
+}
 .space, .date {
     height: 60px
 }

@@ -63,7 +63,8 @@ You can pass an integer into each of those functions to get a specific month or 
                 {calendar.map(dayItem => (
 
 
-                    <DayOfMonth events={
+                    <DayOfMonth key={dayItem.format('DDMMYY')} /* key={dayItem.unix()}*/
+                                events={
                         events.filter(
                             event => (
                                     dayItem.isBetween(moment(event.start),moment(event.end)) ||
@@ -76,7 +77,8 @@ You can pass an integer into each of those functions to get a specific month or 
                                 isToDay={moment().isSame(dayItem,'day')}
                                 isWeekend={(dayItem.day()===6||dayItem.day()===0)}
                                 isOtherMonth={!selectedMonth.isSame(dayItem,'month')}
-                                key={dayItem.format('DDMMYY') /* key={dayItem.unix()}*/}
+
+                                isShowEvents={true}
                     />
                     ))
                 }

@@ -1,9 +1,10 @@
-    import '../css/WeekView.css';
+import '../css/WeekView.css';
 import moment from "moment";
 import React from "react";
 import styled from 'styled-components';
 
 //TODO change AllDay height?
+//TODO make all events visible solve overlapping
 
 function WeekView(props) {
     let startDay=props.startDay.clone()
@@ -159,21 +160,27 @@ function WeekView(props) {
                             )
                         )
                         return eventstoday.map(vall=>{
-                            return(<div key={vall.start} className="event"  style={{gridRowStart:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay, moment(vall.start)),gridRowEnd:getHourRow(props.startHour, props.endHour,props.halfHour,props.allDay, moment(vall.end)),gridColumnStart:getNowHourCol(days,moment(vall.start)),gridColumnEnd:getNowHourCol(days,moment(vall.end))+1}}>
-                                <p className="title">{vall.title}</p>
-                                <p className="title">{moment(vall.start).format("DD")}</p>
-                                <p className="title">{moment(vall.end).format("DD")}</p>
+                            return(<div key={vall.start} className="event" style={{
+                                gridRowStart: getHourRow(props.startHour, props.endHour, props.halfHour, props.allDay, moment(vall.start)),
+                                gridRowEnd: getHourRow(props.startHour, props.endHour, props.halfHour, props.allDay, moment(vall.end)),
+                                gridColumnStart: getNowHourCol(days, moment(vall.start)),
+                                gridColumnEnd: getNowHourCol(days, moment(vall.end)) + 1
+                            }}>
+                                <div className="title">{vall.title}</div>
+                                <div className="time">{moment(vall.start).format("HH:mm")}-{moment(vall.end).format("HH:mm")}</div>
+                                <p>{moment(vall.start).format("DD MMM")}-{moment(vall.end).format("DD MMM")}</p>
+
                             </div>)
                         })
-                    })
-                   /* daysA.map((value,idx) => {
-                            return(
-                                <div className="event"  style={{gridRowStart:2  +idx,gridRowEnd:3+idx,gridColumnStart:1+idx,gridColumnEnd:3+idx+1}}>
-                                    <p className="title">Securities Regulation</p>
-                                    <p className="time">2 PM - 5 PM</p>
-                                </div>
-                            )
-                        })*/
+                   })
+                    /* daysA.map((value,idx) => {
+                             return(
+                                 <div className="event"  style={{gridRowStart:2  +idx,gridRowEnd:3+idx,gridColumnStart:1+idx,gridColumnEnd:3+idx+1}}>
+                                     <p className="title">Securities Regulation</p>
+                                     <p className="time">2 PM - 5 PM</p>
+                                 </div>
+                             )
+                         })*/
 
                 }
             </Days>

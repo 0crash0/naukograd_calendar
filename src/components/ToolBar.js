@@ -6,7 +6,7 @@ function ToolBar(props) {
         <div className="ToolBar">
             <div className="GO">
                 <div className={"left"} onClick={props.prevHandler} key="keyleft">&lt;</div>
-                <div onClick={props.todayHandler} key="keytoday">today</div>
+                <div className={"center"}onClick={props.todayHandler} key="keytoday">today</div>
                 <div className={"right"}  onClick={props.nextHandler}  key="keyright">&gt;</div>
             </div>
             <div className="logo"><img src={logo} width="30%" alt=""/></div>

@@ -8,8 +8,8 @@ function DayOfMonth(props) {
 
     return (
         <div className={"DayOfMonth" +(props.isToDay ? " ToDay" : "") +(props.isWeekend ? " WeekendDay" : "")+(props.isOtherMonth? " OtherMonth":"") + (props.isHeader? " DayOfWeek":"")}>
-            <div className={"divDay"}><h1 className={"Day"}>{props.day}</h1></div>
-            {!props.isHeader  &&
+            <div className={"divDay"}><div className={"Day"}>{props.day}</div></div>
+            {!props.isHeader && props.isShowEvents  &&
                 typeof props.events[0] !== 'undefined' &&
                 <ul className={"events"}>
 
